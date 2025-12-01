@@ -1,19 +1,27 @@
 console.log('Before');
-getUser(1, handleUser);
+// getUser(1, handleUser);
 
 
-function handleUser(user){
-    getRepositories(user.gitHubUsername, handleRepos);
-}
+// function handleUser(user){
+//     getRepositories(user.gitHubUsername, handleRepos);
+// }
 
-function handleRepos(repos){
-    getCommits(repos[0], displayCommits);
-}
+// function handleRepos(repos){
+//     getCommits(repos[0], displayCommits);
+// }
 
-function displayCommits(commits){
-    console.log(commits);
-}
+// function displayCommits(commits){
+//     console.log(commits);
+// }
+
+getUser(1)
+    .then(user => getRepositories(user.gitHubUsername))
+    .then(repos => getCommits(repos[0]))
+    .then(commits => console.log('Commits', commits))
+    .catch(err => console.log('Error', err.message));
+    
 console.log('After');
+
 
 function getUser(id){
     return new Promise((resolve, reject) => {
